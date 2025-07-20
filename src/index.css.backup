@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #000099;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  width:100%;
+  padding:0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+h1 {
+  font-size: 1.6em;
+  line-height: 1.1;
+}
+
+.24h .container {
+  margin: 0;
+  padding: 0;
+  background-color: #000099;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+.star {
+position: absolute;
+top: ランダムな位置;
+left: ランダムな位置;
+width: 2px;
+height: 2px;
+background-color: white;
+border-radius: 50%;
+opacity: 0;
+animation: shooting-star 1.5s ease-out infinite; /* アニメーションを適用 */
+}
+
+@keyframes shooting-star {
+0% {
+transform: translateX(0) translateY(0) scale(1);
+opacity: 0;
+}
+10% {
+opacity: 1;
+}
+80% {
+transform: translateX(-100px) translateY(100px) scale(2); /* 移動と少し拡大 /
+opacity: 0.8;
+}
+100% {
+transform: translateX(-150px) translateY(150px) scale(0.5); / さらに移動と縮小 */
+opacity: 0;
+}
+}

@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg932\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 // audio-reverb-processor.cjs\
+// SoX\uc0\u12391 \u12522 \u12496 \u12540 \u12502 \u21177 \u26524 \u12434 \u36861 \u21152 \u12377 \u12427 \u12471 \u12531 \u12503 \u12523 \u29256 \
+\
+const fs = require('fs');\
+const path = require('path');\
+const \{ spawn \} = require('child_process');\
+\
+console.log('\uc0\u55356 \u57307 \u65039  \u12522 \u12496 \u12540 \u12502 \u20966 \u29702 \u12484 \u12540 \u12523 \u38283 \u22987 ');\
+\
+async function addReverb(inputFile, outputFile, level = 50) \{\
+  console.log(`\uc0\u55356 \u57241 \u65039  \u12522 \u12496 \u12540 \u12502 \u12524 \u12505 \u12523  $\{level\} \u12391 \u20966 \u29702 \u20013 ...`);\
+  \
+  return new Promise((resolve, reject) => \{\
+    const sox = spawn('sox', [inputFile, outputFile, 'reverb', level.toString()]);\
+    \
+    sox.on('close', (code) => \{\
+      if (code === 0) \{\
+        console.log('\uc0\u9989  \u12522 \u12496 \u12540 \u12502 \u20966 \u29702 \u23436 \u20102 :', outputFile);\
+        resolve(outputFile);\
+      \} else \{\
+        console.error('\uc0\u10060  SoX\u20966 \u29702 \u22833 \u25943 ');\
+        reject(new Error(`SoX failed with code $\{code\}`));\
+      \}\
+    \});\
+    \
+    sox.on('error', (error) => \{\
+      console.error('\uc0\u10060  SoX\u12456 \u12521 \u12540 :', error.message);\
+      reject(error);\
+    \});\
+  \});\
+\}\
+\
+async function processLatestAudio() \{\
+  const testDir = './test-audio';\
+  \
+  // Google TTS\uc0\u12501 \u12449 \u12452 \u12523 \u12434 \u25506 \u12377 \
+  const files = fs.readdirSync(testDir)\
+    .filter(file => file.startsWith('google_tts_') && file.endsWith('.mp3'))\
+    .sort();\
+  \
+  if (files.length === 0) \{\
+    console.error('\uc0\u10060  Google TTS\u12501 \u12449 \u12452 \u12523 \u12364 \u35211 \u12388 \u12363 \u12426 \u12414 \u12379 \u12435 ');\
+    return;\
+  \}\
+  \
+  const latestFile = files[files.length - 1];\
+  const inputPath = path.join(testDir, latestFile);\
+  const outputPath = path.join(testDir, `reverb_$\{latestFile\}`);\
+  \
+  console.log('\uc0\u55357 \u56513  \u20966 \u29702 \u23550 \u35937 :', latestFile);\
+  \
+  try \{\
+    await addReverb(inputPath, outputPath, 50);\
+    console.log('\uc0\u55356 \u57225  \u23436 \u20102 \u65281 \u38899 \u22768 \u12501 \u12449 \u12452 \u12523 \u12434 \u30906 \u35469 \u12375 \u12390 \u12367 \u12384 \u12373 \u12356 ');\
+  \} catch (error) \{\
+    console.error('\uc0\u10060  \u20966 \u29702 \u22833 \u25943 :', error.message);\
+  \}\
+\}\
+\
+// \uc0\u23455 \u34892 \
+processLatestAudio();}

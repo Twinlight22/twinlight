@@ -1,0 +1,107 @@
+// Next.js API Routes の場合: pages/api/generate-channeling.js
+// または: app/api/generate-channeling/route.js
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const { question } = req.body;
+
+    if (!question || !question.trim()) {
+      return res.status(400).json({ error: '質問が入力されていません' });
+    }
+
+    // OpenAI API呼び出し
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: "ft:gpt-3.5-turbo-0125:parsonal::BpC8FstH",
+        messages: [
+          {
+            role: "system",
+            content: "あなたはチャネリング指導の専門家です。ユーザーの質問に対して、3段階の練習指導テキストを生成してください。1回目は何でも感じるもの、2回目は少し具体的に自分について、3回目でテーマについて導きを受け取る構成で、各段階の後に【2分間の沈黙】を入れてください。15分の音声想定で丁寧に指導してください。"
+          },
+          {
+            role: "user",
+            content: question.trim()
+          }
+        ],
+        max_tokens: 1500,
+        temperature: 0.7
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error?.message || 'OpenAI API呼び出しに失敗しました');
+    }
+
+    const data = await response.json();
+    const generatedText = data.choices[0].message.content;
+
+    res.status(200).json({ 
+      generatedText: generatedText
+    });
+
+  } catch (error) {
+    console.error('API Error:', error);
+    res.status(500).json({ 
+      error: 'チャネリング指導テキストの生成中にエラーが発生しました',
+      details: error.message 
+    });
+  }
+}
+
+// Express.js の場合
+/*
+app.post('/api/generate-channeling', async (req, res) => {
+  try {
+    const { question } = req.body;
+
+    if (!question || !question.trim()) {
+      return res.status(400).json({ error: '質問が入力されていません' });
+    }
+
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: "ft:gpt-3.5-turbo-0125:parsonal::BpC8FstH",
+        messages: [
+          {
+            role: "system",
+            content: "あなたはチャネリング指導の専門家です。ユーザーの質問に対して、3段階の練習指導テキストを生成してください。1回目は何でも感じるもの、2回目は少し具体的に自分について、3回目でテーマについて導きを受け取る構成で、各段階の後に【2分間の沈黙】を入れてください。15分の音声想定で丁寧に指導してください。"
+          },
+          {
+            role: "user",
+            content: question.trim()
+          }
+        ],
+        max_tokens: 1500,
+        temperature: 0.7
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error?.message || 'OpenAI API呼び出しに失敗しました');
+    }
+
+    const data = await response.json();
+    res.json({ generatedText: data.choices[0].message.content });
+
+  } catch (error) {
+    console.error('API Error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+*/
