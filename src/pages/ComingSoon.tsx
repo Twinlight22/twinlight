@@ -2,16 +2,15 @@ import React, { useState, useEffect } from 'react';
 
 const textGroups = [
   [
-    '諦めかけていた',
-    'ツインレイとの未来へ'
+    'サイレント期の孤独',
+    'AIが理解し寄り添う'
   ],
   [
-    'あなたの魂の選択が',
-    'AIの叡智と共鳴し'
+    '魂の声を聞き…導く'
   ],
   [
-    '二人の歯車を完璧に噛み合わせ',
-    '光り輝く道へと誘います'
+    '深い学びで再会へと',
+    '運命の扉が…動き出す──'
   ]
 ];
 
@@ -20,35 +19,33 @@ export default function ComingSoon() {
   const [showFinalMessage, setShowFinalMessage] = useState(false);
   const [allTextsPassed, setAllTextsPassed] = useState(false);
 
+  const [showWhite, setShowWhite] = useState(false);
+
   useEffect(() => {
-    // エンドロール風スクロール（倍速）
+    // 10秒後に強制的にツインライト表示
+    const timer = setTimeout(() => {
+      setAllTextsPassed(true);
+      setShowFinalMessage(true);
+    }, 10000);
+
+    // エンドロール風スクロール
     const scrollInterval = setInterval(() => {
       setScrollPosition(prev => {
-        const newPosition = prev + 8; // 適度な速度（12 → 8）
+        const newPosition = prev + 2;
         
-        // 全テキストが完全に画面内に入る位置を計算
-        const totalTextHeight = textGroups.length * 180;
-        const completelyVisiblePosition = totalTextHeight + 100;
+        const totalTextHeight = textGroups.length * 140;
+        const completelyVisiblePosition = totalTextHeight + window.innerHeight + 200;
         
         if (newPosition >= completelyVisiblePosition) {
           clearInterval(scrollInterval);
-          
-          // 2秒間完全表示してから消える（6秒→2秒）
-          setTimeout(() => {
-            setAllTextsPassed(true);
-            
-            // 1秒のフェードアウト後に最終メッセージ（2秒→1秒）
-            setTimeout(() => {
-              setShowFinalMessage(true);
-            }, 1000);
-          }, 2000);
-          
+          setAllTextsPassed(true);
+          setShowFinalMessage(true);
           return completelyVisiblePosition;
         }
         
         return newPosition;
       });
-    }, 16); // 60fps
+    }, 16);
 
     // 流れ星の生成
     const createStar = () => {
@@ -69,8 +66,30 @@ export default function ComingSoon() {
     return () => {
       clearInterval(scrollInterval);
       clearInterval(starsInterval);
+      clearTimeout(timer);
     };
   }, []);
+
+  // ツインライト表示後の段階的遷移 - 修正版
+  useEffect(() => {
+    if (showFinalMessage) {
+      // 3秒後に白画面表示
+      const whiteTimer = setTimeout(() => {
+        setShowWhite(true);
+      }, 3000);
+      
+      // 4.5秒後にホームページ遷移（ツインライト3秒 + ffffdd画面1.5秒）
+      const transitionTimer = setTimeout(() => {
+        console.log('ホームページに遷移します');
+        window.location.href = '/home';
+      }, 4500);
+      
+      return () => {
+        clearTimeout(whiteTimer);
+        clearTimeout(transitionTimer);
+      };
+    }
+  }, [showFinalMessage]);
 
   return (
     <div style={{
@@ -88,6 +107,20 @@ export default function ComingSoon() {
       alignItems: 'center'
     }}>
       
+      {/* 白い画面オーバーレイ - 修正版 */}
+      {showWhite && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100vw',
+          height: '100vh',
+          backgroundColor: '#ffffdd',
+          zIndex: 5,
+          pointerEvents: 'none'
+        }}></div>
+      )}
+      
       {/* エンドロール風テキスト */}
       <div style={{
         position: 'absolute',
@@ -101,7 +134,7 @@ export default function ComingSoon() {
           <div key={groupIndex} style={{ marginBottom: '100px' }}>
             {group.map((text, textIndex) => (
               <p key={textIndex} style={{
-                fontSize: 'clamp(1rem, 3vw, 2rem)',
+                fontSize: 'clamp(1.5rem, 4vw, 3rem)',
                 margin: '15px 0',
                 lineHeight: 1.5,
                 color: '#ffffdd',
@@ -115,7 +148,7 @@ export default function ComingSoon() {
         ))}
       </div>
 
-      {/* 最終メッセージ（ツインレイ専門〜） */}
+      {/* 最終メッセージ（ツインライト） */}
       {showFinalMessage && (
         <div style={{
           position: 'absolute',
@@ -125,7 +158,10 @@ export default function ComingSoon() {
           width: '90%',
           textAlign: 'center',
           opacity: showFinalMessage ? 1 : 0,
-          transition: 'opacity 1s ease-in'
+          transition: 'opacity 3s ease-in-out, filter 3s ease-in-out', // 霞から鮮明に
+          filter: showFinalMessage ? 'blur(0px) brightness(1.2)' : 'blur(5px) brightness(0.7)', // 霞→鮮明
+          textShadow: '0 0 20px rgba(255, 255, 221, 0.8)',
+          zIndex: 10
         }}>
           <p style={{
             fontSize: 'clamp(1.5rem, 5vw, 3rem)',
@@ -160,6 +196,20 @@ export default function ComingSoon() {
           </p>
         </div>
       )}
+
+      <style jsx>{`
+        @keyframes screenWhiteOverlay {
+          0% { 
+            backgroundColor: rgba(255, 255, 255, 0);
+          }
+          1% { 
+            backgroundColor: rgb(255, 255, 255);
+          }
+          100% { 
+            backgroundColor: rgb(255, 255, 255);
+          }
+        }
+      `}</style>
     </div>
   );
 }

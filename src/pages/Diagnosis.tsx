@@ -154,7 +154,6 @@ export default function Diagnosis() {
     const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
       button.classList.remove("active", "focus");
-      // boxShadowのリセットを削除（ホバー効果を維持）
     });
   }, [currentQ]);
 
@@ -162,37 +161,42 @@ export default function Diagnosis() {
 
   return (
     <div className="min-h-screen w-full bg-[#000099] flex flex-col items-center justify-center text-[#ffffdd] px-4">
-      <h1 className="w-full text-center text-xl sm:text-2xl md:text-3xl leading-snug tracking-tight mb-6">
-        {current.question}
-      </h1>
-
-      <div className="w-full flex flex-col items-center gap-[1rem]">
-        {current.options.map((option, index) => (
-          <button
-            key={index}
-            onClick={(e) => handleAnswer(e, option.value, index)}
-            className="w-[80vw] max-w-[600px] bg-[#ffffdd]/70 text-[#000099] text-center py-3 px-4 rounded-none shadow focus:outline-none transition-all duration-300 text-base font-medium"
-            style={{
-              border: "none",
-              outline: "none",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0 0 30px 15px #ffffff";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "none";
-            }}
-            onTouchStart={(e) => {
-              e.currentTarget.style.boxShadow = "0 0 30px 15px #ffffff";
-            }}
-            onTouchEnd={(e) => {
-              e.currentTarget.style.boxShadow = "none";
-            }}
-          >
-            {option.text}
-          </button>
-        ))}
+      <div style={{ width: '100%', textAlign: 'center' }}>
+        <h1 className="leading-snug tracking-tight mb-6" style={{ fontSize: 'clamp(1.25rem, 5vw, 2rem)', textAlign: 'center' }}>
+          {current.question}
+        </h1>
       </div>
+
+              <div className="w-full flex flex-col items-center gap-[1rem]">
+          {current.options.map((option, index) => (
+            <button
+              key={index}
+              onClick={(e) => handleAnswer(e, option.value, index)}
+              className="w-[100vw] bg-[#ffffdd]/70 text-[#000099] text-center py-3 px-4 rounded-none shadow focus:outline-none transition-all duration-300 text-base font-medium"
+              style={{
+                border: "none",
+                outline: "none",
+                marginLeft: "-4rem",
+                marginRight: "-4rem",
+                width: "calc(100vw + 8rem)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = "0 0 30px 15px #ffffff";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = "none";
+              }}
+              onTouchStart={(e) => {
+                e.currentTarget.style.boxShadow = "0 0 30px 15px #ffffff";
+              }}
+              onTouchEnd={(e) => {
+                e.currentTarget.style.boxShadow = "none";
+              }}
+            >
+              {option.text}
+            </button>
+          ))}
+        </div>
     </div>
   );
 }

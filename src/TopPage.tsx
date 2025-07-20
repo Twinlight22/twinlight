@@ -20,7 +20,7 @@ export default function TopPage() {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
-      justifyContent: "center",
+      justifyContent: "flex-start", // 上付きに変更
       overflow: "auto",
       zIndex: 1,
     }}>
@@ -33,31 +33,41 @@ export default function TopPage() {
         maxWidth: "none",
         margin: 0,
         padding: "2rem",
+        paddingTop: "5rem", // 上部余白追加
         boxSizing: "border-box",
         position: "relative",
         zIndex: 2,
         flex: 1,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "flex-start", // 上付きに変更
         alignItems: "center",
         paddingBottom: "80px", // フッター分の余白
       }}>
         <Logo />
-        <WelcomeMessage />
-        <DiagnosisButton />
-        <Link
-          to="/diagnosis"
-          className="menu-link"
-          style={{
-            fontSize: "0.9rem",
-            textDecoration: "underline",
-            color: "#ffffdd",
-            transition: "color 0.3s",
-          }}
-        >
-          すべてのメニューを見る
-        </Link>
+        
+        <div style={{ marginBottom: "4rem" }}> {/* 2行空け */}
+          <WelcomeMessage />
+        </div>
+        
+        <div style={{ marginBottom: "12rem" }}> {/* ボタンをさらに2行下げる（8rem→12rem） */}
+          <DiagnosisButton />
+        </div>
+        
+        <div style={{ marginTop: "4rem" }}> {/* 全てのメニューもその分下に（2rem→4rem） */}
+          <Link
+            to="/diagnosis"
+            className="menu-link"
+            style={{
+              fontSize: "0.9rem",
+              textDecoration: "underline",
+              color: "#ffffdd",
+              transition: "color 0.3s",
+            }}
+          >
+            すべてのメニューを見る
+          </Link>
+        </div>
       </div>
 
       {/* フッター */}

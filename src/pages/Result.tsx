@@ -1,111 +1,3 @@
-
-
-
-// import { useNavigate, useLocation } from "react-router-dom";
-// import { useEffect, useState } from "react";
-
-// type SoulType = "消失型" | "投影型" | "自罰型" | "抜け殻型" | "希望恐怖型" | "混乱型";
-
-// export default function Result() {
-//   const navigate = useNavigate();
-//   const location = useLocation();
-//   const [soulType, setSoulType] = useState<SoulType>("消失型"); // デフォルト値
-
-//   useEffect(() => {
-//     // Diagnosis.tsxから渡された結果を取得
-//     if (location.state?.result) {
-//       setSoulType(location.state.result);
-//     }
-//   }, [location.state]);
-
-//   const menus = [
-//     "24時間寄り添い相談",
-//     "過去世リーディングセッション",
-//     "自己対話セッション",
-//     "魂の設計図を読むセッション",
-//     "今生のテーマを知るリーディング",
-//   ];
-
-//   return (
-//     <div
-//       style={{
-//         backgroundColor: "#000099",
-//         color: "#ffffdd",
-//         minHeight: "100vh",
-//         display: "flex",
-//         flexDirection: "column",
-//         alignItems: "center",
-//         paddingTop: "60px",
-//         fontFamily: "'Klee One', sans-serif",
-//       }}
-//     >
-//       {/* メインタイトル（h1） */}
-//       <h1 style={{ fontSize: "1.25rem", marginBottom: "0.5rem", fontWeight: "normal" }}>
-//         現在の魂の状態は
-//       </h1>
-
-//       {/* タイプ名 - 上下線のみ */}
-//       <h2 style={{ 
-//         color: "#FF6600", // オレンジ色のまま
-//         fontSize: "1.75rem", 
-//         marginBottom: "1rem",
-//         padding: "12px 24px",
-//         borderTop: "2px solid #FFD700", // 上線はゴールド
-//         borderBottom: "2px solid #FFD700", // 下線はゴールド
-//         display: "inline-block",
-//       }}>
-//         {soulType}
-//       </h2>
-
-//       {/* 導きの見出し */}
-//       <h2 style={{ fontSize: "1.25rem", marginBottom: "1.5rem" }}>
-//         あなたに今必要な導き
-//       </h2>
-
-//       {/* メニューボタン群 → ハイパーリンク風に変更 */}
-//       <div
-//         style={{
-//           width: "100%",
-//           display: "flex",
-//           flexDirection: "column",
-//           alignItems: "center",
-//           gap: "16px",
-//           paddingTop: "60px", // 40px → 60px に増加
-//         }}
-//       >
-//         {menus.map((menu, index) => (
-//           <a
-//             key={index}
-//             href="#"
-//             onClick={(e) => {
-//               e.preventDefault();
-//               if (menu === "24時間寄り添い相談") {
-//                 navigate("/24h");
-//               }
-//             }}
-//             style={{
-//               color: "#ffffdd",
-//               fontSize: "18px",
-//               textDecoration: "underline",
-//               transition: "all 0.3s ease",
-//               padding: "8px",
-//             }}
-//             onMouseEnter={(e) => {
-//               e.currentTarget.style.textShadow = "0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff"; // 影を重ねて強い光に
-//               e.currentTarget.style.color = "#ffffff";
-//             }}
-//             onMouseLeave={(e) => {
-//               e.currentTarget.style.textShadow = "none";
-//               e.currentTarget.style.color = "#ffffdd";
-//             }}
-//           >
-//             {menu}
-//           </a>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -115,23 +7,6 @@ export default function Result() {
   const navigate = useNavigate();
   const location = useLocation();
   const [soulType, setSoulType] = useState<SoulType>("消失型"); // デフォルト値
-
-
-//削除予定
-
- useEffect(() => {
-    const timer = setTimeout(() => {
-      navigate("/comingsoon");
-    }, 10000); // 診断結果表示から10秒後に遷移
-
-        return () => clearTimeout(timer);
-  }, [navigate]);
-  // ★ここまで追加・修正する部分★
-
-//削除予定
-
-
-
 
   useEffect(() => {
     // Diagnosis.tsxから渡された結果を取得
@@ -153,9 +28,9 @@ export default function Result() {
   }, [soulType]);
 
   const menus = [
-    "24時間寄り添い相談",
+    "寄り添いチャット相談",
     "過去世リーディングセッション",
-    "自己対話セッション",
+    "チャネリング音声ワーク",
     "魂の設計図を読むセッション",
     "今生のテーマを知るリーディング",
   ];
@@ -238,7 +113,7 @@ export default function Result() {
         あなたに今必要な導き
       </h2>
 
-      {/* メニューボタン群 → ハイパーリンク風に変更 */}
+      {/* メニューボタン群 → リンク無効化 */}
       <div
         style={{
           width: "100%",
@@ -250,21 +125,15 @@ export default function Result() {
         }}
       >
         {menus.map((menu, index) => (
-          <a
+          <div
             key={index}
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              if (menu === "24時間寄り添い相談") {
-                navigate("/24h");
-              }
-            }}
             style={{
               color: "#ffffdd",
               fontSize: "18px",
               textDecoration: "underline",
               transition: "all 0.3s ease",
               padding: "8px",
+              cursor: "default", // ポインターを通常カーソルに
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.textShadow = "0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff"; // 影を重ねて強い光に
@@ -276,7 +145,7 @@ export default function Result() {
             }}
           >
             {menu}
-          </a>
+          </div>
         ))}
       </div>
     </div>
