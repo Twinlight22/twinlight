@@ -1,14 +1,22 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
-  root: './',
   plugins: [react()],
   server: {
+    port: 5173,
+    host: 'localhost',
+    strictPort: false,
     fs: {
       strict: false,
-    },
+    }
   },
-  assetsInclude: ['**/*.tsx', '**/*.ts', '**/*.jsx', '**/*.js'],
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
+    minify: 'esbuild'
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+  }
 })
