@@ -9,6 +9,9 @@ export default defineConfig({
     strictPort: false,
     fs: {
       strict: false,
+    },
+    proxy: {
+      '/api': 'http://localhost:3001'
     }
   },
   build: {

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <script>
+    fetch('/api/generate-channeling', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: 'テスト質問' })
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Response:', data);
+    });
+  </script>
+</body>
+</html>

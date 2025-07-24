@@ -1,3 +1,4 @@
+
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -7,6 +8,23 @@ export default function Result() {
   const navigate = useNavigate();
   const location = useLocation();
   const [soulType, setSoulType] = useState<SoulType>("消失型"); // デフォルト値
+
+
+//削除予定
+
+ useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate("/comingsoon");
+    }, 10000); // 診断結果表示から10秒後に遷移
+
+        return () => clearTimeout(timer);
+  }, [navigate]);
+  // ★ここまで追加・修正する部分★
+
+//削除予定
+
+
+
 
   useEffect(() => {
     // Diagnosis.tsxから渡された結果を取得
@@ -28,9 +46,9 @@ export default function Result() {
   }, [soulType]);
 
   const menus = [
-    "寄り添いチャット相談",
+    "24時間寄り添い相談",
     "過去世リーディングセッション",
-    "チャネリング音声ワーク",
+    "自己対話セッション",
     "魂の設計図を読むセッション",
     "今生のテーマを知るリーディング",
   ];
@@ -49,6 +67,8 @@ export default function Result() {
         fontFamily: "'Klee One', sans-serif",
       }}
     >
+
+
       {/* メインタイトル（h1） */}
       <h1 style={{ fontSize: "1.25rem", marginBottom: "0.5rem", fontWeight: "normal" }}>
         現在の魂の状態は
@@ -113,7 +133,7 @@ export default function Result() {
         あなたに今必要な導き
       </h2>
 
-      {/* メニューボタン群 → リンク無効化 */}
+      {/* メニューボタン群 → ハイパーリンク風に変更 */}
       <div
         style={{
           width: "100%",
@@ -125,15 +145,21 @@ export default function Result() {
         }}
       >
         {menus.map((menu, index) => (
-          <div
+          <a
             key={index}
+            href="#"
+            onClick={(e) => {
+              e.preventDefault();
+              if (menu === "24時間寄り添い相談") {
+                navigate("/24h");
+              }
+            }}
             style={{
               color: "#ffffdd",
               fontSize: "18px",
               textDecoration: "underline",
               transition: "all 0.3s ease",
               padding: "8px",
-              cursor: "default", // ポインターを通常カーソルに
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.textShadow = "0 0 20px #ffffff, 0 0 40px #ffffff, 0 0 60px #ffffff"; // 影を重ねて強い光に
@@ -145,7 +171,7 @@ export default function Result() {
             }}
           >
             {menu}
-          </div>
+          </a>
         ))}
       </div>
     </div>
