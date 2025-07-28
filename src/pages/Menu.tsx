@@ -1,6 +1,5 @@
 // src/pages/Menu.tsx
 import { Link } from 'react-router-dom';
-import './Menu.css';
 
 export default function Menu() {
   const menuItems = [
@@ -95,56 +94,53 @@ export default function Menu() {
             fontSize: "2rem",
             fontWeight: "normal",
             margin: 0,
-            marginBottom: "1rem",
             color: "#ffffdd",
           }}>
-            すべてのメニュー
+            ツインライト
           </h1>
-          <p style={{
-            fontSize: "1rem",
-            margin: 0,
-            opacity: 0.9,
-          }}>
-            ご自分に最適なセッションをお選びください
-          </p>
         </div>
 
         {/* メニューリスト */}
         <div className="menu-list" style={{
           display: "flex",
           flexDirection: "column",
-          gap: "1.5rem",
+          gap: "0.8rem", // 1.5rem → 0.8rem に短縮
         }}>
           {menuItems.map((item, index) => (
             <div
               key={index}
               className="menu-item"
               style={{
-                padding: "2rem",
+                padding: "1.5rem 0", // 上下パディング減、左右0で幅いっぱい
                 backgroundColor: item.available 
                   ? "rgba(255, 255, 255, 0.05)" 
                   : "rgba(255, 255, 255, 0.02)",
-                border: item.available 
-                  ? "1px solid rgba(255, 255, 221, 0.2)" 
-                  : "1px solid rgba(255, 255, 221, 0.1)",
-                borderRadius: "12px",
+                border: "none",
+                borderTop: "2px solid rgba(255, 255, 221, 0.4)",
+                borderBottom: "2px solid rgba(255, 255, 221, 0.4)",
+                borderRadius: "0",
                 color: item.available ? "#ffffdd" : "#ffffdd",
                 opacity: item.available ? 1 : 0.6,
                 cursor: item.available ? "pointer" : "default",
                 transition: "all 0.3s ease",
                 position: "relative",
+                width: "100%",
+                margin: "0", // マージン削除
+                boxSizing: "border-box",
               }}
               onMouseEnter={(e) => {
                 if (item.available) {
-                  e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.15)";
-                  e.currentTarget.style.borderColor = "#ffffdd";
-                  e.currentTarget.style.boxShadow = "0 4px 20px rgba(255, 255, 221, 0.3)";
+                  e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.2)";
+                  e.currentTarget.style.borderTopColor = "#ffffff";
+                  e.currentTarget.style.borderBottomColor = "#ffffff";
+                  e.currentTarget.style.boxShadow = "0 6px 40px rgba(255, 255, 221, 0.6), 0 -4px 30px rgba(255, 255, 255, 0.8), 0 4px 30px rgba(255, 255, 255, 0.8), -20px 0 40px rgba(255, 255, 255, 0.6), 20px 0 40px rgba(255, 255, 255, 0.6), 0 0 25px rgba(255, 255, 255, 0.5)";
                 }
               }}
               onMouseLeave={(e) => {
                 if (item.available) {
                   e.currentTarget.style.backgroundColor = "rgba(255, 255, 255, 0.05)";
-                  e.currentTarget.style.borderColor = "rgba(255, 255, 221, 0.2)";
+                  e.currentTarget.style.borderTopColor = "rgba(255, 255, 221, 0.4)";
+                  e.currentTarget.style.borderBottomColor = "rgba(255, 255, 221, 0.4)";
                   e.currentTarget.style.boxShadow = "none";
                 }
               }}
@@ -158,8 +154,9 @@ export default function Menu() {
               <div style={{
                 fontSize: "0.85rem",
                 color: item.available ? "#bbbbff" : "#8888aa",
-                marginBottom: "0.8rem",
+                marginBottom: "0.5rem",
                 fontWeight: "400",
+                textAlign: "center",
               }}>
                 {item.hashtags}
               </div>
@@ -168,13 +165,11 @@ export default function Menu() {
               <div style={{
                 fontSize: "1.3rem",
                 fontWeight: "500",
-                marginBottom: "0.8rem",
-                color: item.available ? "#ffffdd" : "#cccccc",
-                display: "flex",
-                alignItems: "center",
-                gap: "0.5rem",
+                marginBottom: "0.5rem",
+                color: item.available ? "#FFD700" : "#cccccc",
+                textAlign: "center",
               }}>
-                {item.available ? "✅" : "🔜"} {item.title}
+                {item.title}
               </div>
 
               {/* 副題 */}
@@ -183,6 +178,7 @@ export default function Menu() {
                 lineHeight: "1.5",
                 color: item.available ? "#ffffdd" : "#aaaaaa",
                 opacity: 0.9,
+                textAlign: "center",
               }}>
                 {item.subtitle}
               </div>
@@ -191,9 +187,11 @@ export default function Menu() {
               {!item.available && (
                 <div style={{
                   fontSize: "0.8rem",
-                  color: "#aaaaaa",
+                  color: "#FFD700",
                   marginTop: "0.5rem",
                   fontStyle: "italic",
+                  opacity: 0.6,
+                  textAlign: "center",
                 }}>
                   近日公開予定
                 </div>
