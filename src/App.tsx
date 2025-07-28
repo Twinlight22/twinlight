@@ -7,6 +7,7 @@ import Result from "./pages/Result";
 import Chat24h from "./pages/24h";
 import ChannelingPage from "./pages/channeling"; 
 import ComingSoon from "./pages/ComingSoon";
+import Meditation from "./pages/Meditation";
 import Menu from "./pages/Menu";
 import'./App.css';
 
@@ -22,6 +23,7 @@ return (
     <Route path="/result" element={<Result />} />
     <Route path="/24h" element={<Chat24h />} />
     <Route path="/channeling" element={<ChannelingPage />} />
+    <Route path="/meditation" element={<Meditation />} />
     <Route path="/comingsoon" element={<ComingSoon />} /> 
 </Routes>
 )
