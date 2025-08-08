@@ -1,0 +1,93 @@
+
+
+/* ここから下に追加 */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll; /* 強制的にスクロール有効 */
+  height: auto;
+}
+
+body {
+  background-color: #f5f5f5 !important;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: #f5f5f5;
+}
+
+
+.tokushoho-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.tokushoho-content {
+  max-width: 800px;
+  width: 100%;
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.tokushoho-title {
+  text-align: center;
+  color: #333;
+  font-size: 2rem;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #4a90e2;
+}
+
+.tokushoho-section {
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.tokushoho-section h3 {
+  color: #4a90e2;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.tokushoho-section p {
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.tokushoho-section ul {
+  margin-left: 20px;
+  color: #555;
+}
+
+.tokushoho-section li {
+  margin-bottom: 5px;
+}
+
+.service-category {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-left: 4px solid #4a90e2;
+  margin: 10px 0;
+}
+
+.service-category h4 {
+  color: #333;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.tokushoho-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+  color: #666;
+}

@@ -9,6 +9,7 @@ import ChannelingPage from "./pages/channeling";
 import ComingSoon from "./pages/ComingSoon";
 import Meditation from "./pages/Meditation";
 import Menu from "./pages/Menu";
+import Tokushoho from "./pages/Tokushoho";
 import'./App.css';
 
 
@@ -25,6 +26,7 @@ return (
     <Route path="/channeling" element={<ChannelingPage />} />
     <Route path="/meditation" element={<Meditation />} />
     <Route path="/comingsoon" element={<ComingSoon />} /> 
+    <Route path="/tokushoho" element={<Tokushoho />} />
 </Routes>
 )
 
