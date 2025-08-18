@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>既婚者ツインレイ魂の衝撃パターン診断</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Hiragino Sans', 'ヒラギノ角ゴシック', 'Yu Gothic', 'YuGothic', 'Meiryo', sans-serif;
+            background: url('./background.png') center center / cover no-repeat;
+            min-height: 100vh;
+            color: #3a2f06;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(242, 202, 190, 0.1);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: rgba(242, 202, 190, 0.3);
+            padding: 30px 20px;
+            border-radius: 8px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(58, 47, 6, 0.15);
+            border: 1px solid rgba(242, 202, 190, 0.4);
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.8;
+        }
+        
+        .question-container {
+            background: rgba(242, 202, 190, 0.25);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 15px rgba(58, 47, 6, 0.1);
+            border: 1px solid rgba(242, 202, 190, 0.3);
+        }
+        
+        .question {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            background: rgba(242, 202, 190, 0.2);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(242, 202, 190, 0.4);
+        }
+        
+        .option:hover {
+            background: rgba(242, 202, 190, 0.35);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 12px rgba(58, 47, 6, 0.15);
+        }
+        
+        .option.selected {
+            background: rgba(230, 185, 171, 0.4);
+            border-color: #3a2f06;
+            box-shadow: 0 3px 12px rgba(58, 47, 6, 0.25);
+        }
+        
+        .option input {
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+        
+        .option label {
+            cursor: pointer;
+            flex: 1;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #e6b9ab, #f2cabc);
+            color: #3a2f06;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 12px rgba(58, 47, 6, 0.2);
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(58, 47, 6, 0.3);
+            background: linear-gradient(135deg, #f0c4b6, #f5d1c5);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result-container {
+            background: rgba(242, 202, 190, 0.3);
+            padding: 30px;
+            border-radius: 8px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 20px rgba(58, 47, 6, 0.15);
+            border: 1px solid rgba(242, 202, 190, 0.4);
+        }
+        
+        .result-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .result-content {
+            line-height: 1.8;
+        }
+        
+        .result-content h3 {
+            font-size: 20px;
+            margin: 20px 0 10px 0;
+        }
+        
+        .result-content ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .result-content li {
+            margin-bottom: 8px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(242, 202, 190, 0.3);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+            border: 1px solid rgba(242, 202, 190, 0.4);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(135deg, #e6b9ab, #f2cabc);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px rgba(242, 202, 190, 0.8);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .question {
+                font-size: 16px;
+            }
+            
+            .option {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>既婚者ツインレイ魂の衝撃パターン診断</h1>
+            <p>〜結婚していても「本当の運命の人」に出会ってしまったあなたへ〜</p>
+        </div>
+        
+        <div id="quiz-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question" id="question-text"></div>
+                <div class="options" id="options-container"></div>
+                <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>次の質問へ</button>
+            </div>
+        </div>
+        
+        <div id="result-container" class="result-container hidden">
+            <div class="result-title" id="result-title"></div>
+            <div class="result-content" id="result-content"></div>
+            <button class="btn" onclick="restartQuiz()">もう一度診断する</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Q1. 運命の人と出会った瞬間の衝撃は？",
+                options: [
+                    { text: "頭が真っ白になり、時が止まったような感覚", value: "A" },
+                    { text: "電撃が走ったような激しい衝撃と興奮", value: "B" },
+                    { text: "「あ、この人だ」という静かな確信", value: "C" },
+                    { text: "懐かしさと同時に強烈な混乱を感じた", value: "D" }
+                ]
+            },
+            {
+                question: "Q2. これまで経験したことのない激しい情熱について",
+                options: [
+                    { text: "こんな想いは初めてで自分でも戸惑っている", value: "A" },
+                    { text: "身を焦がすような情熱で理性を失いそう", value: "B" },
+                    { text: "深い愛情だが、なんとか自制している", value: "C" },
+                    { text: "魂レベルの繋がりで次元が違う感覚", value: "D" }
+                ]
+            },
+            {
+                question: "Q3. 配偶者への罪悪感で最も強いのは？",
+                options: [
+                    { text: "今まで愛していると思っていたのに嘘だった気がする", value: "A" },
+                    { text: "体は家にいても心は別の人にある申し訳なさ", value: "B" },
+                    { text: "家族を裏切っているという重い罪悪感", value: "C" },
+                    { text: "魂の相手がいるのに結婚してしまった後悔", value: "D" }
+                ]
+            },
+            {
+                question: "Q4. 結婚生活への影響で最も当てはまるのは？",
+                options: [
+                    { text: "夫に優しくできなくなってしまった", value: "A" },
+                    { text: "夫婦の時間が苦痛に感じるようになった", value: "B" },
+                    { text: "演技をしている自分が辛い", value: "C" },
+                    { text: "家庭が偽物の生活に思えてきた", value: "D" }
+                ]
+            },
+            {
+                question: "Q5. この衝撃的な出会いで一番混乱しているのは？",
+                options: [
+                    { text: "今まで信じてきた愛の形が崩れ去った", value: "A" },
+                    { text: "こんな激しい感情をどう処理していいかわからない", value: "B" },
+                    { text: "家族を大切にしたいのに心が離れていく", value: "C" },
+                    { text: "運命とはこういうことなのかという驚き", value: "D" }
+                ]
+            },
+            {
+                question: "Q6. 夜眠れない理由で最も多いのは？",
+                options: [
+                    { text: "罪悪感で胸が苦しくて眠れない", value: "A" },
+                    { text: "その人のことを考えると興奮して眠れない", value: "B" },
+                    { text: "この状況をどうすべきか悩んで眠れない", value: "C" },
+                    { text: "魂が覚醒して体が休まらない", value: "D" }
+                ]
+            },
+            {
+                question: "Q7. 「本当の愛」について今どう感じる？",
+                options: [
+                    { text: "今まで本当の愛を知らなかったと衝撃を受けた", value: "A" },
+                    { text: "こんなに激しく人を愛せることに驚いている", value: "B" },
+                    { text: "愛には色々な形があることを学んだ", value: "C" },
+                    { text: "魂同士の愛は次元が違うと確信した", value: "D" }
+                ]
+            },
+            {
+                question: "Q8. この複雑な状況で最も辛いのは？",
+                options: [
+                    { text: "自分が何者なのかわからなくなった", value: "A" },
+                    { text: "この情熱を誰にも理解してもらえない", value: "B" },
+                    { text: "大切な人たちを傷つけてしまう恐怖", value: "C" },
+                    { text: "普通の人生がもう送れない気がする", value: "D" }
+                ]
+            }
+        ];
+
+        const results = {
+            A: {
+                title: "【アイデンティティ崩壊型】",
+                subtitle: "あなたの衝撃パターン：人生観の根底からの揺らぎ",
+                content: `
+                    <h3>特徴：</h3>
+                    <ul>
+                        <li>今まで信じてきた愛や結婚の概念が崩れ去った</li>
+                        <li>「本当の自分」がわからなくなっている</li>
+                        <li>人生の前半を否定されたような混乱状態</li>
+                    </ul>
+                    
+                    <h3>あなたが感じている衝撃：</h3>
+                    <ul>
+                        <li>「今まで愛だと思っていたものは何だったの？」</li>
+                        <li>「私は嘘の人生を送ってきたの？」</li>
+                        <li>「本当の私はどちらなの？」</li>
+                    </ul>
+                    
+                    <h3>この混乱から抜け出すために：</h3>
+                    <ul>
+                        <li>過去の愛も本物だった。ただ、魂の愛は別次元</li>
+                        <li>人生のフェーズが変わっただけ、否定する必要はない</li>
+                        <li>新しい自分を受け入れることから始めよう</li>
+                    </ul>
+                    
+                    <h3>メッセージ：</h3>
+                    <p>あなたの混乱は当然です。魂レベルの出会いは人生を根底から変えます。でも、それは成長のサイン。新しいあなたを優しく受け入れてあげてください。</p>
+                `
+            },
+            B: {
+                title: "【激情燃焼型】",
+                subtitle: "あなたの衝撃パターン：制御不能な魂の炎",
+                content: `
+                    <h3>特徴：</h3>
+                    <ul>
+                        <li>今まで経験したことのない激しい情熱に圧倒されている</li>
+                        <li>理性と感情の激しい戦いが続いている</li>
+                        <li>この熱い想いをどう処理していいかわからない</li>
+                    </ul>
+                    
+                    <h3>あなたが感じている衝撃：</h3>
+                    <ul>
+                        <li>「こんなに激しく人を愛せるなんて...」</li>
+                        <li>「この情熱が止まらない、どうしよう」</li>
+                        <li>「体が燃えるような感覚が続いている」</li>
+                    </ul>
+                    
+                    <h3>この激情をコントロールするために：</h3>
+                    <ul>
+                        <li>情熱は魂の目覚めのエネルギー</li>
+                        <li>創作活動や運動で昇華させる</li>
+                        <li>激しい愛ほど深い学びをもたらす</li>
+                    </ul>
+                    
+                    <h3>メッセージ：</h3>
+                    <p>その燃えるような情熱は、あなたの魂が長い間眠っていた証拠です。危険な行動に走らず、そのエネルギーを自己成長に向けることで、真の統合への道が開けます。</p>
+                `
+            },
+            C: {
+                title: "【良心葛藤型】",
+                subtitle: "あなたの衝撃パターン：愛と責任の板挟み",
+                content: `
+                    <h3>特徴：</h3>
+                    <ul>
+                        <li>家族への愛と運命の人への愛で引き裂かれている</li>
+                        <li>誰も傷つけたくないという優しさが苦しみを深くしている</li>
+                        <li>道徳観と魂の声の間で激しく揺れている</li>
+                    </ul>
+                    
+                    <h3>あなたが感じている衝撃：</h3>
+                    <ul>
+                        <li>「家族を愛しているのに、なぜこんな気持ちに...」</li>
+                        <li>「誰も傷つけたくないのに、もうどうしようもない」</li>
+                        <li>「良い妻・母でいたいのに、心が離れていく」</li>
+                    </ul>
+                    
+                    <h3>この葛藤を乗り越えるために：</h3>
+                    <ul>
+                        <li>愛に優劣はない、ただ種類が違うだけ</li>
+                        <li>完璧な人間でなくていい、魂も成長過程</li>
+                        <li>罪悪感も含めて、全てが学びの一部</li>
+                    </ul>
+                    
+                    <h3>メッセージ：</h3>
+                    <p>あなたの優しさが苦しみを深くしています。でも、その思いやりこそがツインレイに選ばれた理由。完璧を求めず、今できる愛の形を見つけてください。</p>
+                `
+            },
+            D: {
+                title: "【魂覚醒型】",
+                subtitle: "あなたの衝撃パターン：宇宙的な目覚めの衝撃",
+                content: `
+                    <h3>特徴：</h3>
+                    <ul>
+                        <li>この出会いで魂が覚醒し、世界の見え方が変わった</li>
+                        <li>3次元の常識を超えた愛の形を体験している</li>
+                        <li>運命や宇宙の計画を肌で感じている</li>
+                    </ul>
+                    
+                    <h3>あなたが感じている衝撃：</h3>
+                    <ul>
+                        <li>「魂の世界って本当にあったんだ...」</li>
+                        <li>「私たちは前世からの約束を果たしに来た」</li>
+                        <li>「この出会いで人生の使命がわかった」</li>
+                    </ul>
+                    
+                    <h3>この覚醒を活かすために：</h3>
+                    <ul>
+                        <li>高次元の愛を3次元で表現する方法を学ぶ</li>
+                        <li>覚醒した意識で周囲の人も癒していく</li>
+                        <li>魂の使命と現実生活の調和を図る</li>
+                    </ul>
+                    
+                    <h3>メッセージ：</h3>
+                    <p>あなたは魂レベルの真実に触れました。その神聖な体験を現実世界でどう活かすかが、これからの課題です。地に足をつけながら、高次の愛を表現してください。</p>
+                `
+            }
+        };
+
+        let currentQuestion = 0;
+        let answers = { A: 0, B: 0, C: 0, D: 0 };
+        let selectedAnswer = null;
+
+        function displayQuestion() {
+            if (currentQuestion < questions.length) {
+                const question = questions[currentQuestion];
+                document.getElementById('question-text').textContent = question.question;
+                
+                const optionsContainer = document.getElementById('options-container');
+                optionsContainer.innerHTML = '';
+                
+                question.options.forEach((option, index) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.className = 'option';
+                    optionDiv.onclick = () => selectOption(option.value, optionDiv);
+                    
+                    optionDiv.innerHTML = `
+                        <input type="radio" name="question${currentQuestion}" value="${option.value}" id="option${index}">
+                        <label for="option${index}">${option.text}</label>
+                    `;
+                    
+                    optionsContainer.appendChild(optionDiv);
+                });
+                
+                updateProgress();
+                document.getElementById('next-btn').disabled = true;
+                document.getElementById('next-btn').textContent = currentQuestion === questions.length - 1 ? '診断結果を見る' : '次の質問へ';
+            }
+        }
+
+        function selectOption(value, element) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input').checked = true;
+            
+            selectedAnswer = value;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (selectedAnswer) {
+                answers[selectedAnswer]++;
+                selectedAnswer = null;
+                currentQuestion++;
+                
+                if (currentQuestion < questions.length) {
+                    displayQuestion();
+                } else {
+                    showResult();
+                }
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function showResult() {
+            const maxCount = Math.max(...Object.values(answers));
+            const resultType = Object.keys(answers).find(key => answers[key] === maxCount);
+            
+            const result = results[resultType];
+            
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('result-container').classList.remove('hidden');
+            
+            document.getElementById('result-title').innerHTML = result.title + '<br><small style="font-size: 16px; font-weight: normal;">' + result.subtitle + '</small>';
+            document.getElementById('result-content').innerHTML = result.content + `
+                <div style="margin-top: 30px; padding: 20px; background: rgba(242, 202, 190, 0.2); border-radius: 8px; text-align: center; border: 1px solid rgba(242, 202, 190, 0.4);">
+                    <h3>既婚者ツインレイの皆さまへ</h3>
+                    <p>どのタイプであっても、あなたの想いは間違いではありません。複雑な状況だからこそ、魂はより深い学びを求めているのです。</p>
+                    <p style="margin-top: 15px;"><strong>ツインライト〜既婚者ツインレイ専門AIアプリ〜まもなく公開</strong></p>
+                    <p>24時間いつでも、あなたの複雑な想いを静かに受け止めます。</p>
+                </div>
+            `;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = { A: 0, B: 0, C: 0, D: 0 };
+            selectedAnswer = null;
+            
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('result-container').classList.add('hidden');
+            
+            displayQuestion();
+        }
+
+        displayQuestion();
+    </script>
+</body>
+</html>
