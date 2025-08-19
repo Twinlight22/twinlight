@@ -10,6 +10,7 @@ import ComingSoon from "./pages/ComingSoon";
 import Meditation from "./pages/Meditation";
 import Menu from "./pages/Menu";
 import Tokushoho from "./pages/Tokushoho";
+import PrivacyPolicy from './pages/privacy-policy';
 import'./App.css';
 
 
@@ -27,6 +28,7 @@ return (
     <Route path="/meditation" element={<Meditation />} />
     <Route path="/comingsoon" element={<ComingSoon />} /> 
     <Route path="/tokushoho" element={<Tokushoho />} />
+    <Route path="/privacy-policy" element={<PrivacyPolicy />} /> 
 </Routes>
 )
 
